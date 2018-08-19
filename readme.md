@@ -30,6 +30,14 @@ _[Providers List can be found here](https://www.terraform.io/docs/providers/inde
 Resources sometimes depend on other resources to exist. Terraform can automatically infer when a resouce depends on another. Using a `depends_on` flag you can create an `explicit dependency` on something that is created in a context not visible to Terraform like inside of an s3 bucket which is created from within your application.
 [Dependencies](https://www.terraform.io/intro/getting-started/dependencies.html)
 
+#### Variables & Secrets Management
+Using command line flags you can target different files for the secrets and the variables file. From an automation perspective this is amazing, we can run the same command to provision dev, staging, and prod.
+```shell
+$ terraform apply \
+  -var-file="secret.tfvars" \
+  -var-file="production.tfvars"
+```
+
 # Benefits
 * Manage users on the entire infrastructure and related apps from one spot.
 * Sync production and development - like literally not "kind of".
