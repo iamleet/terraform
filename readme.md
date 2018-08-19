@@ -38,6 +38,9 @@ $ terraform apply \
   -var-file="production.tfvars"
 ```
 
+#### Map
+The lookup function does a dynamic lookup in a map for a key. Spin up an instance on east, it will use the east AMI ID.
+
 # Benefits
 * Manage users on the entire infrastructure and related apps from one spot.
 * Sync production and development - like literally not "kind of".
