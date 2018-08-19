@@ -1,29 +1,13 @@
 provider "aws" {
-  region     = "${var.region}"
-  version = "~> 1.32"
+  region     = "us-east-1"
 }
 
-# New resource for the S3 bucket our application will use.
-resource "aws_s3_bucket" "example" {
-  # NOTE: S3 bucket names must be unique across _all_ AWS accounts, so
-  # this name must be changed before applying this example to avoid naming
-  # conflicts.
-  bucket = "devops.miami"
-  acl    = "private"
+module "consul" {
+  source = "hashicorp/consul/aws"
+
+  num_servers = "3"
 }
 
-resource "aws_instance" "example" {
-  ami           = "${lookup(var.amis, var.region)}"
-  instance_type = "t2.micro"
-  # Tells Terraform that this EC2 instance must be created only after the
-  # S3 bucket has been created.
-  depends_on = ["aws_s3_bucket.example"]
-
-  provisioner "local-exec" {
-  command = "echo ${aws_instance.example.public_ip} > ip_address.txt"
-  }
-}
-
-resource "aws_eip" "ip" {
-  instance = "${aws_instance.example.id}"
+output "consul_server_asg_name" {
+  value = "${module.consul.asg_name_servers}"
 }
