@@ -13,7 +13,7 @@ resource "aws_s3_bucket" "example" {
 }
 
 resource "aws_instance" "example" {
-  ami           = "ami-b374d5a5"
+  ami           = "${lookup(var.amis, var.region)}"
   instance_type = "t2.micro"
   # Tells Terraform that this EC2 instance must be created only after the
   # S3 bucket has been created.
