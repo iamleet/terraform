@@ -26,6 +26,9 @@ Common Terms.
 Providers are the owners of the APIs we interact with, ie: AWS, GCP, Github. This example is currently using one provider but will expand to use several as a more complete proof of concept is adapted.
 _[Providers List can be found here](https://www.terraform.io/docs/providers/index.html)_
 
+#### Dependencies
+Resources sometimes depend on other resources to exist. Terraform can automatically infer when a resouce depends on another. Using a `depends_on` flag you can create an `explicit dependency` on something that is created in a context not visible to Terraform like inside of an s3 bucket which is created from within your application.
+[Dependencies](https://www.terraform.io/intro/getting-started/dependencies.html)
 
 # Benefits
 * Manage users on the entire infrastructure and related apps from one spot.
