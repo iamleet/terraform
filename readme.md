@@ -41,6 +41,12 @@ $ terraform apply \
 #### Map
 The lookup function does a dynamic lookup in a map for a key. Spin up an instance on east, it will use the east AMI ID.
 
+#### Output
+You can create a block of code that will output variables that populate after run time like IPS, arns, pretty much anything the provider lists during the `terraform apply` operation. They are held in memory after run and accessible using `terraform output $variable`.
+
+#### Modules
+Organizing Terraform code into reusable parts. Sweet.
+
 # Benefits
 * Manage users on the entire infrastructure and related apps from one spot.
 * Sync production and development - like literally not "kind of".
