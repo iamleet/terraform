@@ -7,22 +7,22 @@ Go to the site download their latest package and drop it in your `/usr/local/bin
 # Files
 Files contained in the repo.
 
-## Example.tf
+#### Example.tf
 Contains the configuration to use for provisioning. Add the desired configuration in here and when ready run Terraform against it.
 ```shell
 terraform init # installs providers modules
 terraform apply # shows the possible changes and runs them
 terraform show # shows the changes
 ```
-[tutorial](https://www.terraform.io/intro/getting-started/change.html)
+[Tutorial](https://www.terraform.io/intro/getting-started/change.html)
 
-## terraform.tfstate
+#### terraform.tfstate
 Keeps the state of the infrastructure, contains secret information not to be commited to vcp. Also, this file needs to be shared with anyone who is going to run Terraform prior to use. This file is how Terraform knows what it needs to do and must be kept in s3 and pulled before running. When using an automated build system the risk involved with over lap is greatly reduced. [Remote State](https://www.terraform.io/docs/state/remote.html)
 
 # Lingo
 Common Terms.
 
-## Providers
+#### Providers
 Providers are the owners of the APIs we interact with, ie: AWS, GCP, Github. This example is currently using one provider but will expand to use several as a more complete proof of concept is adapted.
 _[Providers List can be found here](https://www.terraform.io/docs/providers/index.html)_
 
