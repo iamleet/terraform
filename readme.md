@@ -38,8 +38,67 @@ $ terraform apply \
   -var-file="production.tfvars"
 ```
 
+#### Multiple Instances
+You can run the same module MANY TIMES!! OMG! >.<
+```
+# my_buckets.tf
+
+module "assets_bucket" {
+  source = "./publish_bucket"
+  name   = "assets"
+}
+
+module "media_bucket" {
+  source = "./publish_bucket"
+  name   = "media"
+}
+```
+OR!
+```
+# publish_ecs_service/ecs-service.tf
+
+variable "instanceID" {} # this is the input parameter of the module
+variable "clusterID" {} # this is the input parameter of the module
+
+resource "ecs_service" "create" {
+  # ...
+}
+# logic every 5 services
+resource "ecs_service" "deploy_cluster" {
+  # ...
+}
+```
+
+
+
+#### List
+Keep a list to run against
+```
+cidrs = [ "10.0.0.0/16", "10.1.0.0/16" ]
+```
+
 #### Map
 The lookup function does a dynamic lookup in a map for a key. Spin up an instance on east, it will use the east AMI ID.
+Example of using a map for secrets.
+```
+dbName = {
+  "production" = "jenkinsProdDB"
+  "development" = "jenkinsDevDB"
+  "testing" = "jenkinsTestDB"
+}
+
+dbUserName = {
+  "production" = "jenkinsProd"
+  "development" = "jenkinsDev"
+  "testing" = "jenkinsTest"
+}
+
+dbPassword = {
+  "production" = "999999999999999999999999999"
+  "development" = "8888888888888888888888"
+  "testing" = "7777777777777777"
+}
+```
 
 #### Output
 You can create a block of code that will output variables that populate after run time like IPS, arns, pretty much anything the provider lists during the `terraform apply` operation. They are held in memory after run and accessible using `terraform output $variable`.
